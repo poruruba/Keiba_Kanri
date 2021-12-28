@@ -22,13 +22,13 @@ exports.handler = async (event, context, callback) => {
 		}
 		case '/keiba-get-betlist':{
 			var body = JSON.parse(event.body);
-			var json = await read_json(JSON_FNAME, []);
+			var json = await jsonfile.read_json(JSON_FNAME, []);
 			return new Response({ status: 'ok', result: json });
 
 		}
 		case '/keiba-set-betlist':{
 			var body = JSON.parse(event.body);
-			await write_json(JSON_FNAME, body.list);
+			await jsonfile.write_json(JSON_FNAME, body.list);
 			return new Response({ status: 'ok' });
 		}
 	}
