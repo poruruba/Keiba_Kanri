@@ -1,4 +1,3 @@
-# express_template
+# 競馬的中管理Webアプリケーション
 
-https://qiita.com/poruruba/items/92164ca0fe7057199adf<br>
-https://qiita.com/poruruba/items/aad6a181e8ef0d956e71<br>
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
