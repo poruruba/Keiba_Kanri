@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src * 'unsafe-inline'; media-src *; img-src * data: content: blob:;">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/start.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spinkit/2.0.1/spinkit.min.css" />
+  <script src="js/methods_bootstrap.js"></script>
+  <script src="js/components_bootstrap.js"></script>
+  <script src="js/components_utils.js"></script>
+  <script src="js/vue_utils.js"></script>
+  <script src="js/gql_utils.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vconsole/dist/vconsole.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <title>競馬成績</title>
+</head>
+<body>
+<!--
+    <div id="loader-background">
+      <div class="sk-plane sk-center"></div>
+    </div>
+-->
+    <div id="top" class="container-fluid">
+      <div class="jumbotron">
+        <h1>競馬成績</h1>
+      </div>
+
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#racelist" data-toggle="tab">GIレースリスト</a></li>
+        <li><a href="#raceinfo" data-toggle="tab">レース情報</a></li>
+        <li><a href="#bedinfo" data-toggle="tab">的中レースリスト</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <br>
+        <div id="racelist" class="tab-pane fade in active">
+          <button class="btn btn-default btn-sm pull-right" v-on:click="racelist_year_change">リロード</button>
+          <div class="form-inline">
+            <label>開催年</label> <select class="form-control" v-model.number="racelist_year" v-on:change="racelist_year_change">
+              <option v-for="value in year_list" v-bind:value="value">{{value}}</option>
+            </select>
+          </div>
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>開催日</th><th>開催</th><th>天気</th><th>R</th><th>レース名</th><th>距離</th><th>頭数</th><th>馬場</th><th>タイム</th><th>勝ち馬</th><th>騎手</th><th>調教師</th><th>2着馬</th><th>3着馬</th><th>的中</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, index) in racelist">
+                <td>{{item.date}}</td><td>{{item.event}}</td><td>{{item.weather}}</td><td>{{item.race}}</td><td><a v-on:click="raceinfo_select(item.id)">{{item.name}}</a></td><td>{{item.distance}}</td>
+                <td>{{item.num_of_horse}}</td><td>{{item.condition}}</td><td>{{item.time}}</td><td>{{item.winner}}</td><td>{{item.jockey}}</td>
+                <td>{{item.trainer}}</td><td>{{item.second}}</td><td>{{item.third}}</td>
+                <td><a v-on:click="raceinfo_select(item.id)" v-if="check_bed(item.id)"><img src="img/mato_678.png" width="30"><font size="+2" color="red">的中！</font></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="raceinfo" class="tab-pane fade in">
+          <div v-if="!raceresult">レースを選択してください。</div>
+          <div v-else>
+            <h1>{{raceresult.raceInfo.title}}</h1>
+            <p>{{raceresult.raceInfo.info2}}</p>
+            <p>{{raceresult.raceInfo.info1}}</p>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>着順</th><th>枠番</th><th>馬番</th><th>馬名</th><th>性齢</th><th>斤量</th><th>騎手</th><th>タイム</th><th>着差</th><th>上り</th><th>単勝</th><th>人気</th><th>馬体重</th><th>調教師</th><th>馬主</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, index) in raceresult.raceResult">
+                  <td>{{item.order}}</td><td>{{item.wakuban}}</td><td>{{item.umaban}}</td><td>{{item.name}}</td><td>{{item.age}}</td><td>{{item.kinryou}}</td>
+                  <td>{{item.jockey}}</td><td>{{item.time}}</td><td>{{item.difference}}</td><td>{{item.last_time}}</td><td>{{item.tan_ods}}</td>
+                  <td>{{item.rating}}</td><td>{{item.weight}}</td><td>{{item.trainer}}</td><td>{{item.owner}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <button class="btn btn-default btn-sm pull-right" v-on:click="change_edit_mode(true)"><span v-if="edit_mode">リロード</span><span v-else>的中入力</span></button>
+            <button v-if="edit_mode" class="btn btn-default btn-sm pull-right" v-on:click="commit_bed">確定</button>
+            <button v-if="edit_mode" class="btn btn-default btn-sm pull-right" v-on:click="change_edit_mode(false)">キャンセル</button>
+            <h3>払い戻し</h3>
+            <dl class="dl-horizontal">
+              <span v-if="raceresult.odsResult.tan">
+                <dt>単勝</dt>
+                <dd>
+                  {{raceresult.odsResult.tan.number}} ： {{raceresult.odsResult.tan.refund}}円
+                  <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.tan"></input>円</span>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.tan > 0">&nbsp;的中！ ×{{bedinfo.tan}}={{raceresult.odsResult.tan.refund * bedinfo.tan / 100}}円</font>
+                </dd>
+              </span>
+              <span v-if="raceresult.odsResult.fuku">
+                <dt>複勝</dt>
+                <dd v-for="(item, index) in raceresult.odsResult.fuku.refunds">
+                  {{item.number}} ： {{item.refund}}円
+                  <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.fuku[index]"></input>円</span>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.fuku[index] > 0">&nbsp;的中！ ×{{bedinfo.fuku[index]}}={{raceresult.odsResult.fuku.refunds[index].refund * bedinfo.fuku[index] / 100}}円</font>
+                </dd>
+              </span>
+              <span v-if="raceresult.odsResult.waku">
+                <dt>枠連</dt> 
+                <dd>
+                  {{raceresult.odsResult.waku.number}} ： {{raceresult.odsResult.waku.refund}}円
+                  <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.waku"></input>円</span>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.waku > 0">&nbsp;的中！ ×{{bedinfo.waku}}={{raceresult.odsResult.waku.refund * bedinfo.waku / 100}}円</font>
+                </dd>
+              </span>
+              <span v-if="raceresult.odsResult.uren">
+                <dt>馬連</dt> 
+                <dd>
+                  {{raceresult.odsResult.uren.number}} ： {{raceresult.odsResult.uren.refund}}円
+                  <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.uren"></input>円</span>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.uren > 0">&nbsp;的中！ ×{{bedinfo.uren}}={{raceresult.odsResult.uren.refund * bedinfo.uren / 100}}円</font>
+                </dd>
+              </span>
+              <span v-if="raceresult.odsResult.wide">
+                <dt>ワイド</dt>
+                <dd v-for="(item, index) in raceresult.odsResult.wide.refunds">
+                  {{item.number}} ： {{item.refund}}円
+                  <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.wide[index]"></input>円</span>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.wide[index] > 0">&nbsp;的中！ ×{{bedinfo.wide[index]}}={{raceresult.odsResult.wide.refunds[index].refund * bedinfo.wide[index] / 100}}円</font>
+                </dd>
+              </span>
+              <span v-if="raceresult.odsResult.utan">
+                <dt>馬単</dt> 
+                <dd>
+                  {{raceresult.odsResult.utan.number}} ： {{raceresult.odsResult.utan.refund}}円
+                  <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.utan"></input>円</span>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.utan > 0">&nbsp;的中！ ×{{bedinfo.utan}}={{raceresult.odsResult.utan.refund * bedinfo.utan / 100}}円</font>
+                </dd>
+              </span>
+              <span v-if="raceresult.odsResult.sanfuku">
+                <dt>三連複</dt> 
+                <dd>
+                  {{raceresult.odsResult.sanfuku.number}} ： {{raceresult.odsResult.sanfuku.refund}}円
+                  <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.sanfuku"></input>円</span>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.sanfuku > 0">&nbsp;的中！ ×{{bedinfo.sanfuku}}={{raceresult.odsResult.sanfuku.refund * bedinfo.sanfuku / 100}}円</font>
+                </dd>
+              </span>
+              <span v-if="raceresult.odsResult.santan">
+                <dt>三連単</dt> 
+                <dd>
+                  {{raceresult.odsResult.santan.number}} ： {{raceresult.odsResult.santan.refund}}円
+                  <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.santan"></input>円</span>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.santan > 0">&nbsp;的中！ ×{{bedinfo.santan}}={{raceresult.odsResult.santan.refund * bedinfo.santan / 100}}円</font>
+                </dd>
+              </span>
+            </dl>
+          </div>
+        </div>
+
+        <div id="bedinfo" class="tab-pane fade in">
+          <div class="form-inline">
+            <button class="btn btn-default btn-sm pull-right" v-on:click="bedlist_export">エクスポート</button>
+            <button class="btn btn-default btn-sm pull-right" v-on:click="dialog_open('#file_import')">インポート</button>
+            <button class="btn btn-default btn-sm pull-right" v-on:click="bedlist_year_change">リロード</button>
+
+            <label>開催年</label> <select class="form-control" v-model.number="bedlist_year" v-on:change="bedlist_year_change">
+              <option v-for="value in year_list" v-bind:value="value">{{value}}</option>
+            </select>
+          </div>
+          <br>
+          <div class="panel panel-default" v-for="(item, index) in bedlist">
+            <div class="panel-heading"><span class="pull-right">{{item.date}}</span><a v-on:click="raceinfo_select(item.id)"><h2 class="panel-title">{{item.title}}</h2></a></div>
+            <div class="panel-body">
+              <dl class="dl-horizontal">
+                <span v-if="item.tan > 0">
+                  <dt>単勝</dt>
+                  <dd>
+                    {{item.odsResult.tan.number}} ： {{item.odsResult.tan.refund}}円
+                    <font size="+2" color="red" v-if="item.tan > 0">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.tan}}={{item.odsResult.tan.refund * item.tan / 100}}円</font>
+                  </dd>
+                </span>
+                <span v-if="item.fuku.filter(item => item > 0).length > 0">
+                  <dt>複勝</dt>
+                  <span v-for="(item2, index2) in item.fuku">
+                    <dd v-if="item2 > 0">
+                      {{item.odsResult.fuku.refunds[index2].number}} ： {{item.odsResult.fuku.refunds[index2].refund}}円
+                      <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.fuku[index2]}}={{item.odsResult.fuku.refunds[index2].refund * item.fuku[index2] / 100}}円</font>
+                    </dd>
+                  </span>
+                </span>
+                <span v-if="item.waku > 0">
+                  <dt>枠連</dt> 
+                  <dd>{{item.odsResult.waku.number}} ： {{item.odsResult.waku.refund}}円
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.waku}}={{item.odsResult.waku.refund * item.waku / 100}}円</font>
+                  </dd>
+                </span>
+                <span v-if="item.uren > 0">
+                  <dt>馬連</dt>
+                  <dd>{{item.odsResult.uren.number}} ： {{item.odsResult.uren.refund}}円
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.uren}}={{item.odsResult.uren.refund * item.uren / 100}}円</font>
+                  </dd>
+                </span>
+                <span v-if="item.wide.filter(item => item > 0).length > 0">
+                  <dt>ワイド</dt>
+                  <span v-for="(item2, index2) in item.wide">
+                    <dd v-if="item2 > 0">
+                      {{item.odsResult.wide.refunds[index2].number}} ： {{item.odsResult.wide.refunds[index2].refund}}円
+                      <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.wide[index2]}}={{item.odsResult.wide.refunds[index2].refund * item.wide[index] / 100}}円</font>
+                    </dd>
+                  </span>
+                </span>
+                <span v-if="item.utan > 0">
+                  <dt>馬単</dt> 
+                  <dd>
+                    {{item.odsResult.utan.number}} ： {{item.odsResult.utan.refund}}円
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.utan}}={{item.odsResult.utan.refund * item.utan / 100}}円</font>
+                  </dd>
+                </span>
+                <span v-if="item.sanfuku > 0">
+                  <dt>三連複</dt> 
+                  <dd>{{item.odsResult.sanfuku.number}} ： {{item.odsResult.sanfuku.refund}}円
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.sanfuku}}={{item.odsResult.sanfuku.refund * item.sanfuku / 100}}円</font>
+                  </dd>
+                </span>
+                <span v-if="item.santan > 0">
+                  <dt>三連単</dt>
+                  <dd>{{item.odsResult.santan.number}} ： {{item.odsResult.santan.refund}}円
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.santan}}={{item.odsResult.santan.refund * item.santan / 100}}円</font>
+                  </dd>
+                </span>
+              </dl>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+      </div>
+
+      <modal-dialog id="file_import">
+        <span slot="content">
+          <div class="modal-header">
+            的中レースのインポート
+          </div>
+          <div class="modal-body">
+            <comp_file id="input_file" v-bind:callback="bedlist_import"></comp_file>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" v-on:click="dialog_close('#file_import')">キャンセル</button>
+          </div>
+        </span>
+      </modal-dialog>
+
+
+      <!-- for progress-dialog -->
+      <progress-dialog v-bind:title="progress_title"></progress-dialog>
+    </div>
+
+    <script src="js/start.js"></script>
+</body>

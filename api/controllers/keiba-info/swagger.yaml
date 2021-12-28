@@ -1,0 +1,52 @@
+paths:
+  /keiba-racelist:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/CommonRequest"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/CommonResponse"
+
+  /keiba-raceresult:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/CommonRequest"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/CommonResponse"
+
+  /keiba-get-betlist:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/CommonRequest"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/CommonResponse"
+
+  /keiba-set-betlist:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/CommonRequest"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/CommonResponse"
