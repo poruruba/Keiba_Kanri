@@ -3,7 +3,7 @@
 //const vConsole = new VConsole();
 //window.datgui = new dat.GUI();
 
-const base_url = "https://home.poruru.work:20443";
+const base_url = "";
 const prefix = "keiba";
 const year_list = [
     2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000,
