@@ -94,8 +94,8 @@ var vue_options = {
             console.log("raceinfo_select(" + id + ")");
             this.raceresult_raceid = id;
             this.edit_mode = false;
-            this.tab_select("#raceinfo");
             this.raceinfo_update();
+            this.tab_select("#raceinfo");
         },
         raceinfo_update: async function(){
             var params = {
