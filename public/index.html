@@ -112,7 +112,7 @@
                 <dd>
                   {{raceresult.odsResult.tan.number}} ： {{raceresult.odsResult.tan.refund}}円
                   <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.tan"></input>円</span>
-                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.tan > 0">&nbsp;的中！ ×{{bedinfo.tan}}={{raceresult.odsResult.tan.refund * bedinfo.tan / 100}}円</font>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.tan > 0">&nbsp;的中！ ×{{bedinfo.tan}}＝{{raceresult.odsResult.tan.refund * bedinfo.tan / 100}}円</font>
                 </dd>
               </span>
               <span v-if="raceresult.odsResult.fuku">
@@ -120,7 +120,7 @@
                 <dd v-for="(item, index) in raceresult.odsResult.fuku.refunds">
                   {{item.number}} ： {{item.refund}}円
                   <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.fuku[index]"></input>円</span>
-                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.fuku[index] > 0">&nbsp;的中！ ×{{bedinfo.fuku[index]}}={{raceresult.odsResult.fuku.refunds[index].refund * bedinfo.fuku[index] / 100}}円</font>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.fuku[index] > 0">&nbsp;的中！ ×{{bedinfo.fuku[index]}}＝{{raceresult.odsResult.fuku.refunds[index].refund * bedinfo.fuku[index] / 100}}円</font>
                 </dd>
               </span>
               <span v-if="raceresult.odsResult.waku">
@@ -128,7 +128,7 @@
                 <dd>
                   {{raceresult.odsResult.waku.number}} ： {{raceresult.odsResult.waku.refund}}円
                   <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.waku"></input>円</span>
-                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.waku > 0">&nbsp;的中！ ×{{bedinfo.waku}}={{raceresult.odsResult.waku.refund * bedinfo.waku / 100}}円</font>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.waku > 0">&nbsp;的中！ ×{{bedinfo.waku}}＝{{raceresult.odsResult.waku.refund * bedinfo.waku / 100}}円</font>
                 </dd>
               </span>
               <span v-if="raceresult.odsResult.uren">
@@ -136,7 +136,7 @@
                 <dd>
                   {{raceresult.odsResult.uren.number}} ： {{raceresult.odsResult.uren.refund}}円
                   <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.uren"></input>円</span>
-                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.uren > 0">&nbsp;的中！ ×{{bedinfo.uren}}={{raceresult.odsResult.uren.refund * bedinfo.uren / 100}}円</font>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.uren > 0">&nbsp;的中！ ×{{bedinfo.uren}}＝{{raceresult.odsResult.uren.refund * bedinfo.uren / 100}}円</font>
                 </dd>
               </span>
               <span v-if="raceresult.odsResult.wide">
@@ -144,7 +144,7 @@
                 <dd v-for="(item, index) in raceresult.odsResult.wide.refunds">
                   {{item.number}} ： {{item.refund}}円
                   <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.wide[index]"></input>円</span>
-                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.wide[index] > 0">&nbsp;的中！ ×{{bedinfo.wide[index]}}={{raceresult.odsResult.wide.refunds[index].refund * bedinfo.wide[index] / 100}}円</font>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.wide[index] > 0">&nbsp;的中！ ×{{bedinfo.wide[index]}}＝{{raceresult.odsResult.wide.refunds[index].refund * bedinfo.wide[index] / 100}}円</font>
                 </dd>
               </span>
               <span v-if="raceresult.odsResult.utan">
@@ -152,7 +152,7 @@
                 <dd>
                   {{raceresult.odsResult.utan.number}} ： {{raceresult.odsResult.utan.refund}}円
                   <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.utan"></input>円</span>
-                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.utan > 0">&nbsp;的中！ ×{{bedinfo.utan}}={{raceresult.odsResult.utan.refund * bedinfo.utan / 100}}円</font>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.utan > 0">&nbsp;的中！ ×{{bedinfo.utan}}＝{{raceresult.odsResult.utan.refund * bedinfo.utan / 100}}円</font>
                 </dd>
               </span>
               <span v-if="raceresult.odsResult.sanfuku">
@@ -160,7 +160,7 @@
                 <dd>
                   {{raceresult.odsResult.sanfuku.number}} ： {{raceresult.odsResult.sanfuku.refund}}円
                   <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.sanfuku"></input>円</span>
-                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.sanfuku > 0">&nbsp;的中！ ×{{bedinfo.sanfuku}}={{raceresult.odsResult.sanfuku.refund * bedinfo.sanfuku / 100}}円</font>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.sanfuku > 0">&nbsp;的中！ ×{{bedinfo.sanfuku}}＝{{raceresult.odsResult.sanfuku.refund * bedinfo.sanfuku / 100}}円</font>
                 </dd>
               </span>
               <span v-if="raceresult.odsResult.santan">
@@ -168,7 +168,7 @@
                 <dd>
                   {{raceresult.odsResult.santan.number}} ： {{raceresult.odsResult.santan.refund}}円
                   <span class="form-inline" v-if="edit_mode"> <input class="form-control form-inline" type="number" v-model.number="bedinfo.santan"></input>円</span>
-                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.santan > 0">&nbsp;的中！ ×{{bedinfo.santan}}={{raceresult.odsResult.santan.refund * bedinfo.santan / 100}}円</font>
+                  <font size="+2" color="red" v-if="!edit_mode && bedinfo.santan > 0">&nbsp;的中！ ×{{bedinfo.santan}}＝{{raceresult.odsResult.santan.refund * bedinfo.santan / 100}}円</font>
                 </dd>
               </span>
             </dl>
@@ -194,7 +194,7 @@
                   <dt>単勝</dt>
                   <dd>
                     {{item.odsResult.tan.number}} ： {{item.odsResult.tan.refund}}円
-                    <font size="+2" color="red" v-if="item.tan > 0">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.tan}}={{item.odsResult.tan.refund * item.tan / 100}}円</font>
+                    <font size="+2" color="red" v-if="item.tan > 0">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.tan}}＝{{item.odsResult.tan.refund * item.tan / 100}}円</font>
                   </dd>
                 </span>
                 <span v-if="item.fuku.filter(item => item > 0).length > 0">
@@ -202,20 +202,20 @@
                   <span v-for="(item2, index2) in item.fuku">
                     <dd v-if="item2 > 0">
                       {{item.odsResult.fuku.refunds[index2].number}} ： {{item.odsResult.fuku.refunds[index2].refund}}円
-                      <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.fuku[index2]}}={{item.odsResult.fuku.refunds[index2].refund * item.fuku[index2] / 100}}円</font>
+                      <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.fuku[index2]}}＝{{item.odsResult.fuku.refunds[index2].refund * item.fuku[index2] / 100}}円</font>
                     </dd>
                   </span>
                 </span>
                 <span v-if="item.waku > 0">
                   <dt>枠連</dt> 
                   <dd>{{item.odsResult.waku.number}} ： {{item.odsResult.waku.refund}}円
-                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.waku}}={{item.odsResult.waku.refund * item.waku / 100}}円</font>
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.waku}}＝{{item.odsResult.waku.refund * item.waku / 100}}円</font>
                   </dd>
                 </span>
                 <span v-if="item.uren > 0">
                   <dt>馬連</dt>
                   <dd>{{item.odsResult.uren.number}} ： {{item.odsResult.uren.refund}}円
-                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.uren}}={{item.odsResult.uren.refund * item.uren / 100}}円</font>
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.uren}}＝{{item.odsResult.uren.refund * item.uren / 100}}円</font>
                   </dd>
                 </span>
                 <span v-if="item.wide.filter(item => item > 0).length > 0">
@@ -223,7 +223,7 @@
                   <span v-for="(item2, index2) in item.wide">
                     <dd v-if="item2 > 0">
                       {{item.odsResult.wide.refunds[index2].number}} ： {{item.odsResult.wide.refunds[index2].refund}}円
-                      <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.wide[index2]}}={{item.odsResult.wide.refunds[index2].refund * item.wide[index] / 100}}円</font>
+                      <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.wide[index2]}}＝{{item.odsResult.wide.refunds[index2].refund * item.wide[index] / 100}}円</font>
                     </dd>
                   </span>
                 </span>
@@ -231,19 +231,19 @@
                   <dt>馬単</dt> 
                   <dd>
                     {{item.odsResult.utan.number}} ： {{item.odsResult.utan.refund}}円
-                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.utan}}={{item.odsResult.utan.refund * item.utan / 100}}円</font>
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.utan}}＝{{item.odsResult.utan.refund * item.utan / 100}}円</font>
                   </dd>
                 </span>
                 <span v-if="item.sanfuku > 0">
                   <dt>三連複</dt> 
                   <dd>{{item.odsResult.sanfuku.number}} ： {{item.odsResult.sanfuku.refund}}円
-                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.sanfuku}}={{item.odsResult.sanfuku.refund * item.sanfuku / 100}}円</font>
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.sanfuku}}＝{{item.odsResult.sanfuku.refund * item.sanfuku / 100}}円</font>
                   </dd>
                 </span>
                 <span v-if="item.santan > 0">
                   <dt>三連単</dt>
                   <dd>{{item.odsResult.santan.number}} ： {{item.odsResult.santan.refund}}円
-                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.santan}}={{item.odsResult.santan.refund * item.santan / 100}}円</font>
+                    <font size="+2" color="red">&nbsp;&nbsp;&nbsp;&nbsp;的中！ ×{{item.santan}}＝{{item.odsResult.santan.refund * item.santan / 100}}円</font>
                   </dd>
                 </span>
               </dl>
