@@ -103,8 +103,8 @@
             </table>
 
             <button class="btn btn-default btn-sm pull-right" v-on:click="change_edit_mode(true)"><span v-if="edit_mode">リロード</span><span v-else>的中入力</span></button>
-            <button v-if="edit_mode" class="btn btn-default btn-sm pull-right" v-on:click="commit_bed">確定</button>
-            <button v-if="edit_mode" class="btn btn-default btn-sm pull-right" v-on:click="change_edit_mode(false)">キャンセル</button>
+            <button v-if="edit_mode" class="btn btn-default pull-right" v-on:click="commit_bed">確定</button>
+            <button v-if="edit_mode" class="btn btn-default pull-right" v-on:click="change_edit_mode(false)">キャンセル</button>
             <h3>払い戻し</h3>
             <dl class="dl-horizontal">
               <span v-if="raceresult.odsResult.tan">
